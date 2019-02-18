@@ -22,7 +22,6 @@ namespace ScreenSaver
             public int PicNum;
             public float X;
             public float Y;
-            public float Speed;
         }
 
         public frmScSaver()
@@ -49,12 +48,12 @@ namespace ScreenSaver
                 BGImages.Add(new Bitmap(image));
             }
 
-            for(int i = 0; i < 50; ++i)
+           for(int i = 0; i < 30; ++i)
             {
                 BritPic mp = new BritPic();
                 mp.PicNum = i % BGImages.Count;
-                mp.X = rand.Next(0, Width);
-                mp.Y = rand.Next(0, Height);
+                mp.X = rand.Next(-200, Width);
+                mp.Y = rand.Next(-200, Height);
 
                 BritPics.Add(mp);
             }
@@ -67,15 +66,13 @@ namespace ScreenSaver
 
         private void frmScSaver_Paint(object sender, PaintEventArgs e)
         {
-            foreach(BritPic bp in BritPics)
+
+            foreach (BritPic bp in BritPics)
             {
                 e.Graphics.DrawImage(BGImages[bp.PicNum], bp.X, bp.Y);
-                bp.X -= 2;
+                bp.X = rand.Next(-200, Width);
+                bp.Y = rand.Next(-200, Height);
 
-                if(bp.X < -250)
-                {
-                    bp.X = Width + rand.Next(20, 100);
-                }
             }
         }
     }
